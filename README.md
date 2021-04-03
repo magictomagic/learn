@@ -1,6 +1,6 @@
 # BB #
 
-Learn from the [excellent person][1], learn by practise.
+Learn from the [excellent person][1], learning by doing.
 
 ------------------------------------
 
@@ -8,7 +8,7 @@ Learn from the [excellent person][1], learn by practise.
 
 + Index By Language
 
-+ Index By Requirement
++ Index By need
 
 # Language #
 
@@ -16,7 +16,7 @@ Learn from the [excellent person][1], learn by practise.
 + Python
 + Go
 
-# Requirement
+# Need
 
 + Node.js communicate with Python 
 
