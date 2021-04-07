@@ -23,6 +23,9 @@ const run = () => {
 }
 
 const parcelRun = async () => {
+    // 套一层 async 很难受。先是 Promise 解决 回调地狱，出现了 then地狱；接着 await 解决前者，出现了 套套地狱
+    // 解决方案：TS3.8 支持 Top-Level await
+    // https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#top-level-await
     console.log(await run())
     console.log("next 1")
 }
