@@ -13,6 +13,10 @@ const myReadSync = async () => {
 // ------------------- //
 
 const run = () => {
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
+    // The Promise.all() method takes an iterable of promises as an input, and returns a single Promise that resolves to an array of the results of the input promises. 
+    // Promise.all(iterable);
+    // async return a Promise
     return Promise.all([1, 2, 3, 4, 5].map(async (item) => { // 若这一行加 await, 则套它的函数要加 async
         return item + " : " + await myReadSync()
     }))
