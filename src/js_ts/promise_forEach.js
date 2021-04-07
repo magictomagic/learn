@@ -1,41 +1,41 @@
-const redis = require("redis");
-const client = redis.createClient();
+const fs = require('fs');
 
-client.on("error", function(error) {
-  console.error(error);
-});
+const myReadSync = async () => {
+    return await new Promise((resolve, reject) => {
+        setTimeout(() => {
+            fs.readFile('./promise_base.js', (err, data) => {
+                resolve(data.toString().substring(0, 27))
+            })    
+        }, 1000);
+    })
+}
 
+// ------------------- //
 
-db_name = 'if_del';
+// 等 forEach 里每个都执行完了再执行后面的操作，相当于模拟一个 stake
 
+// const run =  () => {
+//     [1, 2, 3, 4, 5].forEach(async (item) => {  // 在这一行加 await 可控制 forEach 同步(顺序)执行, 否则异步(乱序)
+//         console.log(item.toString() + " : " + await myReadSync())
+//     })
+//     console.log("next")
+// }
 
-// client.hget(db_name, 'test1', (err, res) => {
-//     console.log(res);
-// });
+const run = async () => {
+    return new Promise((resolve, reject) => {
+        [1, 2, 3, 4, 5].forEach(async (item) => {  
+            resolve(item.toString() + " : " + await myReadSync())
+            // console.log(item.toString() + " : " + await myReadSync())
+        })
+    })
+    // console.log("next")
+}
 
-// client.hget(db_name, 'test', (err, res) => {
-//     console.log(res);
-// });
-let fish_dragon = ['234343324', '32434324543']
-let delete_set = new Set()
-let ss = {}
-fish_dragon.forEach(  (item) => {
-    client.hget(db_name, item, (err,  res) =>  {
-        // let aa = await res
-        if (res) {
-            delete_set.add(item)
-        }else{
-            // del_store[item] = data_test[item]
-            ss[item] = 'd'
-            console.log(ss)
-        }
-        
-    });
-    // ss[item] = 'd'
-    // return await 
-})
+const parcelRun = async () => {
+    console.log(await run())
+    console.log("next 1")
+}
 
-console.log(ss)
-client.quit()
-
+// run()
+parcelRun()
 

@@ -18,7 +18,9 @@ console.log("next")
 // ------------------- //
 
 const run = async () => {
+    // 套一层套内才能控制语句顺序
     console.log(await myReadSync())
+    console.log("next 1")
 }
 
 run()  // 不想用 then, 为了用 await 推进状态, 要套一层 async 适配语法.
