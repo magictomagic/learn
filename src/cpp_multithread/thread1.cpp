@@ -1,17 +1,23 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<iostream>
+#include<thread>
+#include<vector>
 
-#include <iostream> // std::cout
-#include <thread>   // std::thread
-
-void thread_task() {
-    std::cout << "hello thread" << std::endl;
+void hello_again(){
+    std::cout<<"hello again: "<<std::this_thread::get_id()<<std::endl;
 }
 
+int main(){
+    std::vector<std::thread> tv;
 
-int main(int argc, const char *argv[]){
-    std::thread t(thread_task);
-    t.join();
+    // Initialize thread vector
+    for(int i = 0; i < 4; i++){
+        tv.push_back(std::thread(hello_again));
+    }
 
-    return EXIT_SUCCESS;
-} 
+    // A thread can be preempted at any moment 
+    for(auto& t:tv){
+        t.join();
+    }
+
+    return 0;
+}
