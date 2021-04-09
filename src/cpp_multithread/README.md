@@ -16,8 +16,6 @@ shared_future
 
 packaged_task 
 
-mutex
-
 thread 
 
 launch
@@ -43,7 +41,7 @@ graph TD;
    lock --> try_lock
    
    %% Blocks until specified timeout_duration has elapsed or the lock is acquired, whichever comes first. On successful lock acquisition returns true, otherwise returns false.
-   try_lock --> try_lock_for
+   try_lock --> try_lock_for  %% 类似 setTimeout
    %% If timeout_duration is less or equal timeout_duration.zero(), the function behaves like try_lock().
    
    %% Tries to lock the mutex. Blocks until specified timeout_time has been reached or the lock is acquired, whichever comes first. On successful lock acquisition returns true, otherwise returns false.
@@ -65,14 +63,21 @@ graph TD;
    timed_mutex --> try_lock_for
    timed_mutex --> try_lock_until
    
+   %% Separates the thread of execution from the thread object, allowing execution to continue independently. Any allocated resources will be freed once the thread exits. After calling detach *this no longer owns any thread.
+   thread --> detach
    
-   thread
+   %% Checks if the std::thread object identifies an active thread of execution. Specifically, returns true if get_id() != std::thread::id(). So a default constructed thread is not joinable. A thread that has finished executing code, but has not yet been joined is still considered an active thread of execution and is therefore joinable.
+   thread --> joinable  %% 没有被detach或join
+   
+   thread --> join
    
  
 ```
 
 ```mermaid
 graph TD;
+
+   %% sleep_for 让线程休眠
    this_thread --> sleep_for --> `time`
    
    chrono --> steady_clock
@@ -94,5 +99,11 @@ graph TD;
    `time`--> seconds
    `time`--> minutes
    `time`--> hours
+```
+
+```mermaid
+graph TD
+%% Each std::call_once is matched to a std::once_flag variable. 
+call_once 
 ```
 
