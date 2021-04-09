@@ -3,6 +3,7 @@
 #include<thread>
 #include<mutex>
 
+// The class lock_guard is a mutex wrapper that provides a convenient RAII-style mechanism for owning a mutex for the duration of a scoped block.
 struct SaveCounter{
     std::mutex mutex;
     // Counter counter;

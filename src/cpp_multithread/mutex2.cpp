@@ -2,8 +2,6 @@
 #include<vector>
 #include<thread>
 #include<mutex>
-
-
 struct Counter {
     int value;
 
