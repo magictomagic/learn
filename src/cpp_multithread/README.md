@@ -28,11 +28,71 @@ unique_lock
 
 ### thread
 
+### evolution
+
+> Tag: `scoped block` `RAII`
+
 #### mutex
 
 ```mermaid
 graph TD;
+
+   mutex --> lock
+   
+   %% Tries to lock the mutex. Returns immediately. On successful lock acquisition returns true, otherwise returns false.
+   lock --> try_lock
+   
+   %% Blocks until specified timeout_duration has elapsed or the lock is acquired, whichever comes first. On successful lock acquisition returns true, otherwise returns false.
+   try_lock --> try_lock_for
+   %% If timeout_duration is less or equal timeout_duration.zero(), the function behaves like try_lock().
+   
+   %% Tries to lock the mutex. Blocks until specified timeout_time has been reached or the lock is acquired, whichever comes first. On successful lock acquisition returns true, otherwise returns false.
+   try_lock --> try_lock_until
+   %% If timeout_time has already passed, this function behaves like try_lock().
+
+   
+   %% RAII；scoped block；防止 mutex 因中途break而未被释放
    lock --> lock_guard
+   mutex --> lock_guard
+   
+   %% 单线程重复进入mutex避免死锁；保护 shared data 单线程 exclusive
+   mutex --> recursive_mutex
+%%    lock_guard --> recursive_mutex 
+   
+   %% timed_mutex provides the ability to attempt to claim ownership of a timed_mutex with a timeout via the try_lock_for() and try_lock_until() methods.
+   mutex --> timed_mutex
+   
+   timed_mutex --> try_lock_for
+   timed_mutex --> try_lock_until
+   
+   
+   thread
+   
+ 
 ```
 
+```mermaid
+graph TD;
+   this_thread --> sleep_for --> `time`
+   
+   chrono --> steady_clock
+   
+   %% Returns a time point representing the current point in time.
+   steady_clock --> now
+   
+   %% Class template std::chrono::duration represents a time interval.
+   chrono --> duration
+   
+   %% returns the count of ticks(嘀嗒)
+   duration --> count
+   
+   chrono --> `time`
+   
+   `time`--> nanoseconds
+   `time`--> microseconds
+   `time`--> milliseconds
+   `time`--> seconds
+   `time`--> minutes
+   `time`--> hours
+```
 
