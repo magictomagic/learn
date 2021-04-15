@@ -1,4 +1,5 @@
 #include<iostream>
+#include<utility>
 // static_cast<T&&>(x)  losing r-value references 
 // perfect forwarding allows to pass both r-value references and l-value references. This is done via reference collapsing:
 
@@ -25,7 +26,34 @@
 
 // 　　　　（2）当万能引用（T&& param）绑定到右值时，同理，右值只能绑定到右值引用上，故T会被推导为T类型。从而param的类型就是T&&（右值引用）。
 
+struct HeavyData{
+};
+
+struct ExtractData{
+    ExtractData(const HeavyData&){
+        puts("copy");
+    }
+
+    ExtractData(HeavyData&&){
+        puts("move");
+    }
+
+};
+
+
+template<typename T>
+ExtractData Extract(T&& fd){
+    return ExtractData{std::forward<T>(fd)};
+    // return ExtractData{fd};
+}
 
 int main(){
+    HeavyData h1;
+
+    ExtractData{h1};
+    ExtractData{std::move(h1)};
+
+    Extract(h1);
+    Extract(std::move(h1));  // 使用forward, copy 变 move
 
 }
