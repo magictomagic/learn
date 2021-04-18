@@ -54,6 +54,6 @@ int main(){
     ExtractData{std::move(h1)};
 
     Extract(h1);
-    Extract(std::move(h1));  // 使用forward, copy 变 move
+    Extract(std::move(h1));  // 使用forward, 输出的 copy 变 move
 
 }
