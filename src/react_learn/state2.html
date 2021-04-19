@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello_react</title>
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="./js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="./js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="./js/babel.min.js"></script>
+
+    <script type="text/babel">
+    class MyComponent extends React.Component{
+        constructor(props){
+            super(props)
+            this.state = {isHot: false}
+            this.change = this.change.bind(this)
+        }
+        render(){
+            const {isHot} = this.state
+            return <h1 onClick={this.change}>asdfadsf{isHot ? "111" : "222"}</h1>
+        }
+        change() {
+            const {isHot} = this.state
+            this.setState({isHot: !isHot})
+        }
+
+    }
+    ReactDOM.render(<MyComponent/>, document.getElementById('test'))
+    </script>
+</body>
+
+</html>

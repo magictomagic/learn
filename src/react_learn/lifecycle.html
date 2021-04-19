@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello_react</title>
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="./js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="./js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="./js/babel.min.js"></script>
+
+    <script type="text/babel">
+        class LifeCycle  extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {asd: 1};
+
+            }
+
+            componentWillMount(){
+                console.log("componentWillMount");
+            }
+
+            componentDidMount(){
+                console.log("componentDidMount");
+            }
+
+            componentWillUpdate(){
+                console.log("componentWillUpdate");
+            }
+
+            componentDidUpdate(){
+                console.log("componentDidUpdate");
+            }
+
+            shouldComponentUpdate(){
+                console.log("shouldComponentUpdate");
+                // setState 到 render之间的阀门。如false则should not update
+                // return false;
+                return true;
+            }
+
+            dsa = () => {
+                const {asd} = this.state;
+                this.setState({asd: asd + 1});
+            }
+
+            render() {
+                console.log("render");
+                return (
+                    <div>
+                        <span>aaa{this.state.asd}</span>
+                        <button onClick={this.dsa}>aaaaaa</button>    
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<LifeCycle/>, document.getElementById('test'));
+    </script>
+</body>
+
+</html>

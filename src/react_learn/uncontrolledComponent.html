@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello_react</title>
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="./js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="./js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="./js/babel.min.js"></script>
+
+    <script type="text/babel">
+        // 现用现取 是 非受控组件
+        class Asd extends React.Component{
+            handleSubmit = (event) => {
+                event.preventDefault();
+                const {username, password} = this;
+                alert(`${username.value} + ${password.value}`)
+            }
+            render(){
+                return (
+                    <form onSubmit={this.handleSubmit}>
+                        asdas<input ref={c => this.username = c} type='text' name='username'/>
+                        asdasd<input ref={c => this.password = c} type='text' name='password'/>
+                        <button>asdasd</button>
+                    </form>
+                )
+            }
+        }
+        ReactDOM.render(<Asd/>, document.getElementById('test'));
+    </script>
+</body>
+
+</html>

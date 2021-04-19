@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello_react</title>
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="./js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="./js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="./js/babel.min.js"></script>
+
+    <script type="text/babel">
+        // 随着输入把输入值维护到状态中去
+        class Asd extends React.Component{
+
+            state = {
+                password: '',
+                username: '',
+            }
+
+            inputPassword = (event) => {
+                this.setState({password: event.target.value});
+            }
+
+            inputUsername = (event) => {
+                this.setState({username: event.target.value});
+            }
+
+            handleSubmit = (event) => {
+                event.preventDefault();
+                const {username, password} = this.state;
+                alert(`${username} + ${password}`)
+            }
+            render(){
+                return (
+                    <form onSubmit={this.handleSubmit}>
+                        asdas<input onChange={this.inputUsername} type='text' name='username'/>
+                        asdasd<input onChange={this.inputPassword} type='text' name='password'/>
+                        <button>asdasd</button>
+                    </form>
+                )
+            }
+        }
+        ReactDOM.render(<Asd/>, document.getElementById('test'));
+    </script>
+</body>
+
+</html>

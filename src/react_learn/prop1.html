@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello_react</title>
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+    <div id="test1"></div>
+    <div id="test3"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="./js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="./js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="./js/babel.min.js"></script>
+    <script type="text/javascript" src="./js/prop-types.js"></script>
+
+    <script type="text/babel">
+        class Hhyzuidhuai extends React.Component{
+            
+            render(){
+                const {name, age} = this.props;
+                return (
+                <ul>
+                    <li> { name } </li>
+                    <li> { age + 1 }</li>    
+                </ul>
+                )
+            }
+        }
+        Hhyzuidhuai.proptypes = {
+            name: PropTypes.string.isRequired,
+            age: PropTypes.number
+            // 限制函数用func
+        }
+        Hhyzuidhuai.defaultProps = {
+            age: 999
+        }
+        const obj = {name: "sbyh", age: 58};
+        ReactDOM.render(<Hhyzuidhuai name="asd" />, document.getElementById("test"));
+        ReactDOM.render(<Hhyzuidhuai name="yhsb" age={48}/>, document.getElementById("test1"));
+        ReactDOM.render(<Hhyzuidhuai {...obj}/>, document.getElementById("test3"));
+        
+    </script>
+</body>
+
+</html>

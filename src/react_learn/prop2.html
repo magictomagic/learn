@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello_react</title>
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="./js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="./js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="./js/babel.min.js"></script>
+
+    <script type="text/babel">
+        function MyFunction(props){
+            const {name, age} = props;
+            return (
+                <ul>
+                    <li>{name}</li>
+                    <li>{age}</li>
+                </ul>
+            )
+        }
+
+        ReactDOM.render(<MyFunction name='asdfads' age={1312}/>, document.getElementById('test'));
+    </script>
+</body>
+
+</html>
